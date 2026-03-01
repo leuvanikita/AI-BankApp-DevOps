@@ -1,0 +1,47 @@
+services:
+
+  mysql:
+    image: mysql:8.0
+    container_name: mysql-bankapp
+    environment:
+      MYSQL_DATABASE: bankappdb
+      MYSQL_ROOT_PASSWORD: Test@123
+    volumes:
+      - ./mysql-ai:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    networks:
+      - bankapp    
+    healthcheck: 
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-pTest@123"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+
+
+  ai-bankapp:
+    build:
+      context: .
+    container_name: ai-bankapp
+    environment:
+      MYSQL_HOST: mysql-bankapp  # Docker DNS resolves mysql → MySQL container IP.inside app container: trying to connect to MySQL container on  jdbc:mysql://localhost:3306 but Correct way: jdbc:mysql://mysql:3306
+      MYSQL_PORT: 3306
+      MYSQL_DATABASE: bankappdb
+      MYSQL_USER: root
+      MYSQL_PASSWORD: Test@123
+    ports:
+      - "8080:8080"
+    networks:
+      - bankapp
+    depends_on:
+      mysql:
+        condition: service_healthy
+
+volumes:
+  mysql-ai:
+
+networks:
+  bankapp:
+    driver: bridge
+  
