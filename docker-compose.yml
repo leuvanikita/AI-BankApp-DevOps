@@ -7,7 +7,7 @@ services:
       MYSQL_DATABASE: bankappdb
       MYSQL_ROOT_PASSWORD: Test@123
     volumes:
-      - ./mysql-ai:/var/lib/mysql
+      - mysql-ai:/var/lib/mysql
     ports:
       - "3306:3306"
     networks:
@@ -27,11 +27,13 @@ services:
     networks:
       - bankapp
     volumes:
-      - ollama_data:/root/.ollama  
-
-  ai-bankapp:
-    build:
-      context: .
+      - ollama_data:/root/.ollama
+    depends_on:
+      mysql:
+        condition: service_healthy
+    
+  bankapp:
+    image: niki0303/ai-bankapp:latest
     container_name: ai-bankapp
     environment:
       MYSQL_HOST: mysql-bankapp  # Docker DNS resolves mysql → MySQL container IP.inside app container: trying to connect to MySQL container on  jdbc:mysql://localhost:3306 but Correct way: jdbc:mysql://mysql:3306
@@ -41,7 +43,7 @@ services:
       MYSQL_PASSWORD: Test@123
       OLLAMA_URL: http://ollama:11434
     ports:
-      - "8080:8080"
+      - "8081:8080"
     networks:
       - bankapp
     depends_on:
