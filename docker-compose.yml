@@ -33,7 +33,7 @@ services:
         condition: service_healthy
     
   bankapp:
-    image: niki0303/ai-bankapp:latest
+    build: .
     container_name: ai-bankapp
     environment:
       MYSQL_HOST: mysql-bankapp  # Docker DNS resolves mysql → MySQL container IP.inside app container: trying to connect to MySQL container on  jdbc:mysql://localhost:3306 but Correct way: jdbc:mysql://mysql:3306

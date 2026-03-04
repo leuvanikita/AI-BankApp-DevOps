@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 # AI-BankApp-DevOps
 
 A Spring Boot banking application used as a base for learning end-to-end DevOps — from Docker to Kubernetes to GitOps.
@@ -202,4 +202,4 @@ src/main/resources/
 | `main`   | Full DevOps pipeline (CI/CD, K8s, etc.)               |
 
 Each branch builds on the previous one. See `ROADMAP.md` for the full checklist.
->>>>>>> docker
+

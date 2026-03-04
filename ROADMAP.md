@@ -62,7 +62,7 @@ Each phase builds on the previous one. Check off as you go.
 - [ ] Non-root container user
 
 ## Phase 10: AI Chatbot (`ai` branch)
-<<<<<<< HEAD
+
 - [ ] Ollama container in docker-compose (self-hosted, zero cost)
 - [ ] Chat REST API in Spring Boot calling Ollama
 - [ ] Floating chat widget on dashboard
@@ -72,7 +72,6 @@ Each phase builds on the previous one. Check off as you go.
 - [x] Chat REST API in Spring Boot calling Ollama
 - [x] Floating chat widget on dashboard
 - [x] Context-aware — knows user's balance and transactions
->>>>>>> docker
 - [ ] Deploy Ollama on K8s with GPU/CPU resource limits
 
 ## Phase 11: Production Readiness (`prod` branch)
